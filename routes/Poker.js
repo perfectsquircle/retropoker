@@ -8,14 +8,11 @@ class Poker {
 
     getPokerRoom(req, res, next) {
         const roomId = req.params.roomid;
-        console.log();
 
-        if (rooms.has(roomId)) {
-            res.send("joined existing room: " + roomId);
-        } else {
+        if (!rooms.has(roomId)) {
             this.createPokerRoom(roomId);
-            res.send("created room: " + roomId);
         }
+        res.render("poker", { roomId })
     }
 
     createPokerRoom(roomId) {
