@@ -1,5 +1,4 @@
-const rooms = new Map();
-const PokerRoom = require("../lib/poker/PokerRoom");
+const rooms = require("../lib/poker/rooms")
 
 class Poker {
     constructor(app) {
@@ -10,15 +9,14 @@ class Poker {
         const roomId = req.params.roomid;
 
         if (!rooms.has(roomId)) {
-            this.createPokerRoom(roomId);
+            rooms.add(roomId);
+            // return next();
         }
         res.render("poker", { roomId })
     }
 
     createPokerRoom(roomId) {
-        let room = new PokerRoom();
-        rooms.set(roomId, room);
-        return room;
+
     }
 }
 

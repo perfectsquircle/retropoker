@@ -10,4 +10,10 @@ $(() => {
     socket.on('message', function (data) {
         console.log('Incoming message:', data);
     });
+
+    $("#login").on("submit", (event) => {
+        event.preventDefault();
+        socket.emit("add user", $("input[name='username']").val());
+        return false;
+    })
 });
