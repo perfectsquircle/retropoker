@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import './App.css';
-import User from './model/User'
+import './style.css';
+import User from './User'
 
 class Card extends Component {
   render() {
@@ -73,7 +73,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    let users = await fetch("/poker/asdf/users");
+    let users = await fetch("/api/poker/asdf/users");
     let usersJson = await users.json();
     this.setState({
       users: usersJson.map(u => new User(u.id, u.name))
