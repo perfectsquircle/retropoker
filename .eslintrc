@@ -2,5 +2,12 @@
     "rules": {
         "no-undefined": "error",
         "semi": "warn"
+    },
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
     }
 }
