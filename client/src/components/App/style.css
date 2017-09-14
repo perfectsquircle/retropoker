@@ -1,0 +1,31 @@
+.card {
+  height: 100px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.card.selected {
+  background-color: yellow;
+}
+
+.field {
+  color: white;
+  display: flex;
+  background-color: green;
+}
+
+.placeholder-outer {
+  text-align: center;
+}
+
+.placeholder {
+  border: 5px solid white;
+  border-radius: 20px;
+  width: 150px;
+  height: 250px;
+}
+
+.placeholder + figcaption {
+  font-family: 'Pacifico', cursive;
+  font-size: 24px;
+}

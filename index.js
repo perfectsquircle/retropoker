@@ -21,8 +21,6 @@ server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
 
-app.set('view engine', 'ejs');
-
 // Routing
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 app.use(poker);

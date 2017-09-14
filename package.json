@@ -1,17 +1,16 @@
 {
-  "name": "socket.io-chat",
+  "name": "retropoker",
   "version": "0.0.0",
-  "description": "A simple chat client using socket.io",
+  "description": "A simple planning poker app using socket.io and React",
   "main": "index.js",
-  "author": "Grant Timmerman",
+  "author": "Calvin Furano",
   "private": true,
   "license": "BSD",
   "dependencies": {
-    "ejs": "^2.5.7",
     "express": "4.13.4",
     "socket.io": "^2.0.3"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon --ignore client/ index.js"
   }
 }
