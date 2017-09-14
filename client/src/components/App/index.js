@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './style.css';
-import User from './User'
+import User from './User';
 
 class Card extends Component {
   render() {
@@ -65,15 +65,16 @@ class Field extends Component {
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       users: []
-    }
+    };
   }
 
   async componentDidMount() {
-    let users = await fetch("/api/poker/asdf/users");
+    let roomId = this.props.match.params.roomId;
+    let users = await fetch(`/api/poker/${roomId}/users`);
     let usersJson = await users.json();
     this.setState({
       users: usersJson.map(u => new User(u.id, u.name))
@@ -90,7 +91,7 @@ class App extends Component {
           <Hand />
         </section>
       </main>
-    )
+    );
   }
 }
 

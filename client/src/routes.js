@@ -22,6 +22,7 @@ const Routes = (props) => (
 
             <Switch>
                 <Route exact path="/" component={App} />
+                <Route path="/poker/:roomId" component={App} />
                 <Route path="/about" component={About} />
                 <Route component={NotFound} />
             </Switch>
