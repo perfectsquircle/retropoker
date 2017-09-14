@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import io from 'socket.io-client';
+import Routes from './routes';
 
 const socket = io("/poker");
 
@@ -18,5 +18,9 @@ socket.on('message', function (data) {
     console.log('Incoming message:', data);
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Routes />,
+    document.getElementById('root')
+);
+
 registerServiceWorker();
