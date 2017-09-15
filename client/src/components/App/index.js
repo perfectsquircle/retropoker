@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './style.css';
 import User from './User';
+import io from 'socket.io-client';
+import uid from 'uid';
 
 class Card extends Component {
   render() {
@@ -63,35 +65,99 @@ class Field extends Component {
   }
 }
 
-class App extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
+    this.state = { value: '' };
 
-    this.state = {
-      users: []
-    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentDidMount() {
-    let roomId = this.props.match.params.roomId;
-    let users = await fetch(`/api/poker/${roomId}/users`);
-    let usersJson = await users.json();
-    this.setState({
-      users: usersJson.map(u => new User(u.id, u.name))
-    });
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.onLogin(new User(uid(), this.state.value));
   }
 
   render() {
     return (
-      <main>
-        <section className="table">
-          <Field users={this.state.users} />
-        </section>
-        <section>
-          <Hand />
-        </section>
-      </main>
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     );
+  }
+}
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    var currentUser = User.getCurrentUser();
+
+    this.state = {
+      users: [],
+      currentUser: currentUser,
+      roomId: null
+    };
+  }
+
+  async componentWillMount() {
+    let roomId = this.props.match.params.roomId;
+    let socket = this.socket = io("/poker");
+    socket.emit('room', roomId);
+    if (this.state.currentUser) {
+      socket.emit('add user', this.state.currentUser);
+    }
+
+    socket.on('enter user', (user) => {
+      console.log('enter user', user);
+      this.setState({
+        users: [...this.state.users, user]
+      });
+      console.log(this.state);
+    });
+  }
+
+  async componentDidMount() {
+    let roomId = this.props.match.params.roomId;
+    let users = await User.getUsersForRoom(roomId);
+    this.setState({
+      users: users,
+      roomId: roomId
+    });
+  }
+
+  render() {
+    if (this.state.currentUser) {
+      return (
+        <main>
+          <section className="table">
+            <Field users={this.state.users} />
+          </section>
+          <section>
+            <Hand />
+          </section>
+        </main>
+      );
+    } else {
+      return <Login onLogin={(event) => this.onLogin(event)} />
+    }
+  }
+
+  onLogin(user) {
+    console.log("Setting user", user);
+    this.setState({ currentUser: user });
+
+    this.socket.emit('add user', user);
+    User.setCurrentUser(user);
   }
 }
 

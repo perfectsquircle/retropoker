@@ -15,7 +15,7 @@ router.get("/api/poker/:roomid", (req, res, next) => {
 router.get("/api/poker/:roomid/users", (req, res, next) => {
     let room = rooms.get(req.params.roomid);
     console.log(room, rooms);
-    res.json(room ? room.users : []);
+    res.json(room ? room.getUsers() : []);
 });
 
 module.exports = router;
