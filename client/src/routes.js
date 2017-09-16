@@ -6,7 +6,7 @@ import {
     Switch
 } from 'react-router-dom';
 
-import App from './components/App';
+import Poker from './components/Poker';
 import About from './components/About';
 import NotFound from './components/NotFound';
 
@@ -21,8 +21,8 @@ const Routes = (props) => (
             <hr />
 
             <Switch>
-                <Route exact path="/" component={App} />
-                <Route path="/poker/:roomId" component={App} />
+                <Route exact path="/" component={Poker} />
+                <Route path="/poker/:roomId" component={Poker} />
                 <Route path="/about" component={About} />
                 <Route component={NotFound} />
             </Switch>

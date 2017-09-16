@@ -1,7 +1,7 @@
 {
     "rules": {
         "no-undefined": "error",
-        "semi": "warn"
+        "semi": "off"
     },
     "parserOptions": {
         "ecmaVersion": 2017,

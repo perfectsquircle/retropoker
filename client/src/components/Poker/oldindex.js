@@ -4,6 +4,7 @@ import './style.css';
 import User from './User';
 import io from 'socket.io-client';
 import uid from 'uid';
+import { connect } from 'react-redux';
 
 class Card extends Component {
   render() {
@@ -96,6 +97,7 @@ class Login extends Component {
   }
 }
 
+/*
 class App extends Component {
   constructor(props) {
     super(props);
@@ -160,5 +162,36 @@ class App extends Component {
     User.setCurrentUser(user);
   }
 }
+*/
+
+let Table = ({ currentUser, users, onLogin }) => {
+  if (currentUser) {
+    return (
+      <main>
+        <section className="table">
+          <Field users={users} />
+        </section>
+        <section>
+          <Hand />
+        </section>
+      </main>
+    );
+  } else {
+    return <Login onLogin={(username) => onLogin(username)} />
+  }
+};
+
+let App = connect(
+  state => {
+    return state;
+  },
+  dispatch => {
+    return {
+      onLogin(username) {
+        console.log("dispatch " + username)
+      }
+    };
+  }
+)(Table);
 
 export default App;

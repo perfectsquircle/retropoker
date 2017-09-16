@@ -9,7 +9,7 @@ function users(state = [], action) {
             if (state.find(u => u.id === action.id)) return state;
             return [...state, { id: action.id, name: action.name }];
         case PLAY_CARD:
-            return state.map(u => u.id === action.id ? assign(u, action.card) : u);
+            return state.map(u => u.currentUser ? assign(u, { selectedCard: action.card }) : u);
         default:
             return state;
     }

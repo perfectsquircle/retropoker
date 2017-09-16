@@ -16,8 +16,8 @@ export function addUser(id, name) {
     return { type: ADD_USER, id, name };
 }
 
-export function playCard(userId, card) {
-    return { type: PLAY_CARD, userId, card };
+export function playCard(card) {
+    return { type: PLAY_CARD, card };
 }
 
 export function setVisibilityFilter(filter) {
