@@ -1,26 +1,9 @@
 import React, { Component } from 'react';
-import Field from './components/Field';
-import FieldContainer from './containers/FieldContainer';
-import Hand from './components/Hand';
-import HandContainer from './containers/HandContainer';
-import Login from './components/Login';
+import AppContainer from './containers/AppContainer'
 import './style.css';
 
-let App = () => {
-    // if (currentUser) {
-    return (
-        <main>
-            <section className="table">
-                <FieldContainer />
-            </section>
-            <section>
-                <HandContainer />
-            </section>
-        </main>
-    );
-    // } else {
-    //     return <Login onLogin={(username) => onLogin(username)} />
-    // }
+let Poker = () => {
+    return <AppContainer />
 };
 
-export default App;
+export default Poker;

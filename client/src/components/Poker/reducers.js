@@ -7,7 +7,7 @@ function users(state = [], action) {
     switch (action.type) {
         case ADD_USER:
             if (state.find(u => u.id === action.id)) return state;
-            return [...state, { id: action.id, name: action.name }];
+            return [...state, { id: action.id, name: action.name, currentUser: action.currentUser }];
         case PLAY_CARD:
             return state.map(u => u.currentUser ? assign(u, { selectedCard: action.card }) : u);
         default:

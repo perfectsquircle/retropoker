@@ -5,7 +5,6 @@ import Hand from '../components/Hand'
 const mapDispatchToProps = dispatch => {
     return {
         onClick: card => {
-            console.log("dispatch: play card", card)
             dispatch(playCard(card))
         }
     }

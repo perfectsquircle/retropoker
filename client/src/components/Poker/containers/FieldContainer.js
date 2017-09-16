@@ -1,12 +1,8 @@
 import { connect } from 'react-redux'
 import Field from '../components/Field'
 
-const mapStateToProps = state => {
-    return state;
-}
-
 const FieldContainer = connect(
-    mapStateToProps
+    state => state
 )(Field);
 
 export default FieldContainer;

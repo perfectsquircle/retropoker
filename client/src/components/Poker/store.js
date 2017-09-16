@@ -9,10 +9,7 @@ import {
 } from './actions';
 
 let store = createStore(app, {
-    currentUser: 1,
-    users: [
-        { id: 1, name: "Calvino", currentUser: true }
-    ]
+    users: []
 });
 
 export default store;
