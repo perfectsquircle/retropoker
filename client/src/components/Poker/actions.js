@@ -1,3 +1,12 @@
+import io from 'socket.io-client'
+
+
+let socket = io("/poker")
+
+socket.on('connect', () => {
+    console.log("connected to socket (actions)")
+});
+
 export const ADD_USER = 'ADD_USER';
 export const PLAY_CARD = 'PLAY_CARD';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
@@ -8,7 +17,11 @@ export const VisibilityFilters = {
 };
 
 export function addUser(id, name, currentUser = false) {
-    return { type: ADD_USER, id, name, currentUser };
+    return (dispatch) => {
+        dispatch({ type: ADD_USER, id, name, currentUser })
+
+        socket.emit('add user', { id, name })
+    }
 }
 
 export function playCard(card) {
