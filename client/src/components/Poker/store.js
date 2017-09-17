@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import app from './reducers';
-import { addUser } from './actions'
+import { addUser, removeUser, playTheirCard } from './actions'
 import thunkMiddleware from 'redux-thunk'
-import io from 'socket.io-client'
+import socket from './socket'
 
 let store = createStore(
     app,
@@ -11,18 +11,27 @@ let store = createStore(
 
 export default store;
 
-let unsubscribe = store.subscribe(() =>
-    console.log(store.getState())
-)
+let unsubscribe = store.subscribe(() => console.log(store.getState()))
 
+socket.on('connection', () => {
+    let state = store.getState();
+    let user = state.users.find(u => u.currentUser);
+    let userId = user && user.id;
+    socket.emit('room', { userId, roomId: state.roomId })
+    console.log('emit room', userId, state.roomId)
+})
 
-let socket = io("/poker")
-
-socket.on('connect', () => {
-    // todo: dispatch 
-    console.log("connected to socket (store)")
+socket.on('enter user', (user) => {
+    console.log('receive: enter user', user)
+    store.dispatch(addUser(user.id, user.name, false));
 });
 
-socket.on('add user', (user) => {
-    store.emit(addUser(user.id, user.name));
+socket.on('play card', ({ userId, card }) => {
+    console.log('receive: play card', userId, card)
+    store.dispatch(playTheirCard(userId, card))
+})
+
+socket.on('exit user', (userId) => {
+    console.log('receive: exit user', userId)
+    store.dispatch(removeUser(userId));
 });
