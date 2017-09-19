@@ -1,11 +1,34 @@
 .card {
-  height: 100px;
-  width: 50px;
+  height: 145px;
+  width: 100px;
   cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: auto;
 }
 
 .card.selected {
   background-color: yellow;
+}
+
+.card.card-1 {
+  background-image: url(/cards/1H.svg);
+}
+.card.card-2 {
+  background-image: url(/cards/2H.svg);
+}
+.card.card-3 {
+  background-image: url(/cards/3H.svg);
+}
+.card.card-5 {
+  background-image: url(/cards/5H.svg);
+}
+.card.card-8 {
+  background-image: url(/cards/8H.svg);
+}
+.card.card-13 {
+  background-image: url(/cards/13H.svg);
 }
 
 .field {
@@ -20,9 +43,10 @@
 
 .placeholder {
   border: 5px solid white;
-  border-radius: 20px;
-  width: 150px;
-  height: 250px;
+  border-radius: 10px;
+  width: 115px;
+  height: 160px;
+  display: flex;
 }
 
 .placeholder + figcaption {

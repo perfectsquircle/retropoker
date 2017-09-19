@@ -6,7 +6,9 @@ import socket from './socket'
 
 let store = createStore(
     app,
-    applyMiddleware(thunkMiddleware)
+    {
+        users: [{ id: 'hello', name: "Geordi", currentUser: true }]
+    }
 );
 
 export default store;
