@@ -8,8 +8,6 @@ import {
 } from './actions';
 import { combineReducers } from 'redux';
 
-const assign = Object.assign.bind(Object, {});
-
 function users(state = [], action) {
     switch (action.type) {
         case ADD_USER:

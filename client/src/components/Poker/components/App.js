@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import FieldContainer from '../containers/FieldContainer';
 import HandContainer from '../containers/HandContainer';
 import LoginContainer from '../containers/LoginContainer';

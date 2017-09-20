@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import AppContainer from './containers/AppContainer'
 import './style.css';
 
